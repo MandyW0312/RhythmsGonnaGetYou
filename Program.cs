@@ -69,7 +69,6 @@ namespace RhythmsGonnaGetYou
                         Console.Write("What is the Band's Contact Phone Number ");
                         var newContactPhoneNumber = int.Parse(Console.ReadLine());
 
-
                         var newBand = new Band
                         {
                             Name = newName,
@@ -84,30 +83,28 @@ namespace RhythmsGonnaGetYou
                         context.Bands.Add(newBand);
                         context.SaveChanges();
                     }
-                    //     	IF (Album)
                     if (answer == "ALBUM")
                     {
-                        //     		Ask the user which Band they want to add the Album to
-                        //     		Read the answer and set it to a variable (bandNameChosen)
-                        //     		var band = context.Bands.First(band => band.Name == “bandNameChosen”);
+                        Console.Write("Which Band do you want to Add an Album to? ");
+                        var bandNameChosen = Console.ReadLine();
+                        var band = context.Bands.First(band => band.Name == bandNameChosen);
 
-                        //     		Ask the user what is the Title of the Album
-                        //     		Read the answer and set it to a variable
-                        //     		Ask the user if the Album is Explicit (true or false)
-                        //     		Read the answer and set it to a variable
-                        //     		Ask the user for the Album’s Release Date
-                        //     		Read the answer and set it to a variable
+                        Console.Write("What is the Title of the Album? ");
+                        var newTitle = Console.ReadLine();
+                        Console.Write("Is the Album Explicit (true or false)? ");
+                        var newIsExplicit = bool.Parse(Console.ReadLine());
+                        Console.Write("What is the Album's Release Date (Please have it in this format YYYY-MM-DD)? ");
+                        var newReleaseDate = DateTime.Parse(Console.ReadLine());
 
-                        //     		Make a new instance of an Album (using the answers)
-                        //     			var newAlbum = new Album {
-                        //     			Title=
-                        //     			IsExplicit=
-                        //     			ReleaseDate=
-                        //     			BandId= band.Id    }
-
-                        //     		Add the Album to the table of Albums
-                        //     			context.Albums.Add(newAlbum);
-                        //     			context.SaveChanges();
+                        var newAlbum = new Album
+                        {
+                            Title = newTitle,
+                            IsExplicit = newIsExplicit,
+                            ReleaseDate = newReleaseDate,
+                            BandId = band.Id
+                        };
+                        context.Albums.Add(newAlbum);
+                        context.SaveChanges();
                     }
                     //     	IF (Song)
                     if (answer == "SONG")
