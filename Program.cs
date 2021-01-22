@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using Microsoft.EntityFrameworkCore;
 
 namespace RhythmsGonnaGetYou
 {
@@ -25,6 +26,7 @@ namespace RhythmsGonnaGetYou
             while (userHasChosenToQuit == false)
             {
                 // Display Menu Options:
+                Console.WriteLine();
                 Console.WriteLine("Menu Options:");
                 Console.WriteLine();
                 // Add
@@ -180,14 +182,20 @@ namespace RhythmsGonnaGetYou
                     //     				context.SaveChanges();
                 }
                 // IF (Current Clients)
-                if (choice == "Current Clients")
+                if (choice == "CURRENT CLIENTS")
                 {
-                    // var bandsSigned = bands.Where(band => band.IsSigned == true);
-                    // foreach (var band in bandsSigned)
-                    // Print out all the currently signed bands
-                    // var bandsNotSigned = bands.Where(band => band.IsSigned == false);
-                    // foreach (var band in bandsNotSigned)
-                    // Print out all the bands not currently signed
+                    var bandsSigned = context.Bands.Where(band => band.IsSigned == true);
+                    foreach (var band in bandsSigned)
+                    {
+                        Console.WriteLine();
+                        Console.WriteLine($"{band.Name} is Currently Signed");
+                    }
+                    var bandsNotSigned = context.Bands.Where(band => band.IsSigned == false);
+                    foreach (var band in bandsNotSigned)
+                    {
+                        Console.WriteLine();
+                        Console.WriteLine($"{band.Name} is Not Currently Signed");
+                    }
                 }
                 // IF (Quit)
                 if (choice == "QUIT")
