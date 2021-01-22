@@ -22,7 +22,7 @@ namespace RhythmsGonnaGetYou
 
             // While the user has not chosen to quit (Bool = false)
             var userHasChosenToQuit = false;
-            while (userHasChosenToQuit == true)
+            while (userHasChosenToQuit == false)
             {
                 // Display Menu Options:
                 Console.WriteLine("Menu Options:");
@@ -37,9 +37,10 @@ namespace RhythmsGonnaGetYou
                 Console.WriteLine("Current Clients");
                 // Quit
                 Console.WriteLine("Quit");
+                Console.WriteLine();
 
                 // Ask the user which they would like to choose
-                Console.Write("Which Option would you like to choose?");
+                Console.Write("Which Option would you like to choose? ");
                 // Read the answer and set to a variable
                 var choice = Console.ReadLine().ToUpper().Trim();
 
@@ -192,6 +193,7 @@ namespace RhythmsGonnaGetYou
                 if (choice == "QUIT")
                 {
                     // set Bool = true;
+                    userHasChosenToQuit = true;
                 }
             }
             // Say GoodBye
