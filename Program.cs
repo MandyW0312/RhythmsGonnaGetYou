@@ -126,42 +126,53 @@ namespace RhythmsGonnaGetYou
                 }
                 if (choice == "VIEW")
                 {
-                    // Ask the user if they want to view all the Bands, view all the Albums, or view Albums by a Specific Band (Possible Menu Options)
-                    // Read the answer and set to a variable
-                    // IF (Bands)
-                    // foreach(var band in context.Bands)
-                    // Print out all the Bands
-
-                    //     	IF (Albums)
-                    //     		var albumsInOrder = albums.OrderBy(album => album.ReleaseDate);
-                    //     		foreach (var album in albumsInOrder)
-                    //     			Print out all the Albums
-
-                    //     	IF (Specific)
-                    //     		Ask the user which Band they want to look up
-                    //     		Read the answer and set it to a variable
-                    //     		foreach (var album in context.Albums.Include(bands => band.Name == “answer”)
-                    //     			Print out the albums for a Specific Band
+                    Console.WriteLine();
+                    Console.WriteLine("Menu Options:");
+                    Console.WriteLine("View All the Bands (Bands)");
+                    Console.WriteLine("View All the Albums (Albums)");
+                    Console.WriteLine("View All the Albums of a Specific Band (Specific)");
+                    Console.WriteLine();
+                    var answer = Console.ReadLine().ToUpper().Trim();
+                    if (answer == "BANDS")
+                    {
+                        foreach (var band in context.Bands)
+                        {
+                            Console.WriteLine($"{band.Name}");
+                        }
+                    }
+                    if (answer == "ALBUMS")
+                    {
+                        var albumsInOrder = context.Albums.OrderBy(album => album.ReleaseDate);
+                        foreach (var album in albumsInOrder)
+                        {
+                            Console.WriteLine($"{album.Title}");
+                        }
+                    }
+                    if (answer == "SPECIFIC")
+                    {
+                        Console.Write("Which Band would like to look up Albums for? ");
+                        var specificBand = Console.ReadLine();
+                        foreach (var album in context.Albums.Where(band => band.TheBandAssociatedtotheAlbumObject.Name == specificBand))
+                        {
+                            Console.WriteLine($"The Albums for {specificBand} is {album.Title}");
+                        }
+                    }
                 }
                 if (choice == "CONTRACT CHANGE")
                 {
-                    Console.WriteLine();
                     Console.Write("Would you like to Release a Band from their Contract (Release) or Resign a Band (Resign)? ");
                     var answer = Console.ReadLine().ToUpper().Trim();
                     if (answer == "RELEASE")
                     {
-                        Console.WriteLine();
                         Console.Write("What Band would you like to Release from their Contract? ");
                         var releasedBand = Console.ReadLine();
                         var existingBand = context.Bands.FirstOrDefault(band => band.Name == releasedBand);
                         if (existingBand == null)
                         {
-                            Console.WriteLine();
                             Console.WriteLine($"We couldn't find the Band {releasedBand} in our system, so we are unable to complete your request.");
                         }
                         else
                         {
-                            Console.WriteLine();
                             Console.WriteLine($"Ending our Contract with {releasedBand}");
                             existingBand.IsSigned = false;
                             context.SaveChanges();
@@ -169,18 +180,15 @@ namespace RhythmsGonnaGetYou
                     }
                     if (answer == "RESIGN")
                     {
-                        Console.WriteLine();
                         Console.Write("What Band would you like to Resign to their Contract? ");
                         var resignedBand = Console.ReadLine();
                         var existingBand = context.Bands.FirstOrDefault(band => band.Name == resignedBand);
                         if (existingBand == null)
                         {
-                            Console.WriteLine();
                             Console.WriteLine($"We couldn't find the Band {resignedBand} in our system, so we are unable to complete your request.");
                         }
                         else
                         {
-                            Console.WriteLine();
                             Console.WriteLine($"Resigning our Contract with {resignedBand}");
                             existingBand.IsSigned = true;
                             context.SaveChanges();
@@ -192,13 +200,11 @@ namespace RhythmsGonnaGetYou
                     var bandsSigned = context.Bands.Where(band => band.IsSigned == true);
                     foreach (var band in bandsSigned)
                     {
-                        Console.WriteLine();
                         Console.WriteLine($"{band.Name} is Currently Signed");
                     }
                     var bandsNotSigned = context.Bands.Where(band => band.IsSigned == false);
                     foreach (var band in bandsNotSigned)
                     {
-                        Console.WriteLine();
                         Console.WriteLine($"{band.Name} is Not Currently Signed");
                     }
                 }
