@@ -16,37 +16,28 @@ namespace RhythmsGonnaGetYou
         }
         static void Main(string[] args)
         {
-            // Welcome to the App
             BannerMessage("Welcome to The Rhythms Gonna Get You Record Company");
 
             var context = new RecordCompanyContext();
 
-            // While the user has not chosen to quit (Bool = false)
+
             var userHasChosenToQuit = false;
             while (userHasChosenToQuit == false)
             {
-                // Display Menu Options:
                 Console.WriteLine();
                 Console.WriteLine("Menu Options:");
                 Console.WriteLine();
-                // Add
                 Console.WriteLine("Add");
-                // View
                 Console.WriteLine("View");
-                // Contract Change
                 Console.WriteLine("Contract Change");
-                // Current Clients
                 Console.WriteLine("Current Clients");
-                // Quit
                 Console.WriteLine("Quit");
                 Console.WriteLine();
 
-                // Ask the user which they would like to choose
                 Console.Write("Which Option would you like to choose? ");
-                // Read the answer and set to a variable
                 var choice = Console.ReadLine().ToUpper().Trim();
 
-                // IF (Add)
+
                 if (choice == "ADD")
                 {
                     // Ask the user if they would like to add a New Band, add a New Album for a band, or add a New Song to an album (Possible Menu Options)
@@ -133,7 +124,6 @@ namespace RhythmsGonnaGetYou
                     //     					context.Songs.Add(newSong);
                     //     					context.SaveChanges();
                 }
-                // IF (View)
                 if (choice == "VIEW")
                 {
                     // Ask the user if they want to view all the Bands, view all the Albums, or view Albums by a Specific Band (Possible Menu Options)
@@ -153,35 +143,50 @@ namespace RhythmsGonnaGetYou
                     //     		foreach (var album in context.Albums.Include(bands => band.Name == “answer”)
                     //     			Print out the albums for a Specific Band
                 }
-                // IF (Contract Change)
                 if (choice == "CONTRACT CHANGE")
                 {
-                    // Ask the user if they want to Release a Band from their Contract or Resign a Band
-                    // Read the answer and set it to a variable
-                    // IF (Release)
-                    // Ask the user what Band do they want to Release from their Contract
-                    // Read the answer and set it to a variable
-                    // var existingBand = context.Bands.FirstOrDefault(band => band.Name == “answer”);
-                    // IF (existingBand == null)
-                    // Print out couldn’t find the band
-                    // ELSE
-                    // Print out Ending the Contract with (answer)
-                    // existingBand.IsSigned = false;
-                    // context.SaveChanges();
-
-                    //     	IF (Resign)
-                    //     		Ask the user what Band do they want to Resign to the Company
-                    //     		Read the answer and set it to a variable
-
-                    //     		var existingBand = context.Bands.FirstOrDefault(band => band.Name == “answer”);
-                    //     			IF (existingBand == null)
-                    //     				Print out couldn’t find the band
-                    //     			ELSE
-                    //     				Print out Ending the Contract with (answer)
-                    //     				existingBand.IsSigned = true;
-                    //     				context.SaveChanges();
+                    Console.WriteLine();
+                    Console.Write("Would you like to Release a Band from their Contract (Release) or Resign a Band (Resign)? ");
+                    var answer = Console.ReadLine().ToUpper().Trim();
+                    if (answer == "RELEASE")
+                    {
+                        Console.WriteLine();
+                        Console.Write("What Band would you like to Release from their Contract? ");
+                        var releasedBand = Console.ReadLine();
+                        var existingBand = context.Bands.FirstOrDefault(band => band.Name == releasedBand);
+                        if (existingBand == null)
+                        {
+                            Console.WriteLine();
+                            Console.WriteLine($"We couldn't find the Band {releasedBand} in our system, so we are unable to complete your request.");
+                        }
+                        else
+                        {
+                            Console.WriteLine();
+                            Console.WriteLine($"Ending our Contract with {releasedBand}");
+                            existingBand.IsSigned = false;
+                            context.SaveChanges();
+                        }
+                    }
+                    if (answer == "RESIGN")
+                    {
+                        Console.WriteLine();
+                        Console.Write("What Band would you like to Resign to their Contract? ");
+                        var resignedBand = Console.ReadLine();
+                        var existingBand = context.Bands.FirstOrDefault(band => band.Name == resignedBand);
+                        if (existingBand == null)
+                        {
+                            Console.WriteLine();
+                            Console.WriteLine($"We couldn't find the Band {resignedBand} in our system, so we are unable to complete your request.");
+                        }
+                        else
+                        {
+                            Console.WriteLine();
+                            Console.WriteLine($"Resigning our Contract with {resignedBand}");
+                            existingBand.IsSigned = true;
+                            context.SaveChanges();
+                        }
+                    }
                 }
-                // IF (Current Clients)
                 if (choice == "CURRENT CLIENTS")
                 {
                     var bandsSigned = context.Bands.Where(band => band.IsSigned == true);
@@ -197,14 +202,11 @@ namespace RhythmsGonnaGetYou
                         Console.WriteLine($"{band.Name} is Not Currently Signed");
                     }
                 }
-                // IF (Quit)
                 if (choice == "QUIT")
                 {
-                    // set Bool = true;
                     userHasChosenToQuit = true;
                 }
             }
-            // Say GoodBye
             BannerMessage("Thank you for visiting The Rhythms Gonna Get You Record Company");
         }
     }

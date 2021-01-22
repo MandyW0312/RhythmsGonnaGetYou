@@ -216,7 +216,7 @@ context.SaveChanges();
     			IF (existingBand == null)
     				Print out couldn’t find the band
     			ELSE
-    				Print out Ending the Contract with (answer)
+    				Print out Resigning the Contract with (answer)
     				existingBand.IsSigned = true;
     				context.SaveChanges();
 
