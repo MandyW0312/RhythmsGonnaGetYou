@@ -40,98 +40,114 @@ namespace RhythmsGonnaGetYou
 
                 if (choice == "ADD")
                 {
-                    // Ask the user if they would like to add a New Band, add a New Album for a band, or add a New Song to an album (Possible Menu Options)
-                    // Read the answer and set to a variable
-                    // IF (Band)
-                    // Ask the user what is the Band’s Name
-                    // Read the answer and set it to a variable
-                    // Ask the user what is the Band’s Country Of Origin
-                    // Read the answer and set it to a variable
-                    // Ask the user how many Members are in the Band
-                    // Read the answer and set it to a variable (int.Parse)
-                    // Ask the user for the Band’s Website
-                    // Read the answer and set it to a variable
-                    // Ask the user for the Band’s Style of Music
-                    // Read the answer and set it to a variable
-                    // Ask the user if the Band is currently signed to the Record Company (true or false)
-                    // Read the answer and set it to a variable
-                    // Ask the user what is the Band’s Contact Name
-                    // Read the answer and set it to a variable
-                    // Ask the user what is the Band’s Contact Phone Number
-                    // Read the answer and set it to a variable (int.Parse)
+                    Console.WriteLine();
+                    Console.WriteLine("Menu Options:");
+                    Console.WriteLine();
+                    Console.WriteLine("Add a New Band (Band)");
+                    Console.WriteLine("Add a New Album for a Band (Album)");
+                    Console.WriteLine("Add a New Song to an Album (Song)");
+                    Console.WriteLine();
+                    Console.Write("Which Option would you like to choose? ");
 
-                    //     		Make a new instance of a band (using the answers)
-                    //     			var newBand = new Band {
-                    //     			Name=
-                    //     			CountryOfOrigin=
-                    //     			NumberOfMembers=
-                    //     			Website=
-                    //     			Style=
-                    //     			IsSigned=
-                    //     			ContactName=
-                    //     			ContactPhoneNumber=    }
+                    var answer = Console.ReadLine().ToUpper().Trim();
+                    if (answer == "BAND")
+                    {
+                        Console.Write("What is the Name of the Band? ");
+                        var newName = Console.ReadLine();
+                        Console.Write("What is the Band's Country Of Origin? ");
+                        var newCountryOfOrigin = Console.ReadLine();
+                        Console.Write("How many Members are in the Band? ");
+                        var newNumberOfMembers = int.Parse(Console.ReadLine());
+                        Console.Write("What is the Band's Website URL? ");
+                        var newWebsite = Console.ReadLine();
+                        Console.Write("What is the Band's Style of Music? ");
+                        var newStyle = Console.ReadLine();
+                        Console.Write("Is the Band currently Signed to the Record Company (true or false)? ");
+                        var newIsSigned = bool.Parse(Console.ReadLine());
+                        Console.Write("What is the Band's Contact Name? ");
+                        var newContactName = Console.ReadLine();
+                        Console.Write("What is the Band's Contact Phone Number ");
+                        var newContactPhoneNumber = int.Parse(Console.ReadLine());
 
-                    //     		Add the Band to the table of Bands
-                    //     			context.Bands.Add(newBand);
-                    //     			context.SaveChanges();
 
+                        var newBand = new Band
+                        {
+                            Name = newName,
+                            CountryOfOrigin = newCountryOfOrigin,
+                            NumberOfMembers = newNumberOfMembers,
+                            Website = newWebsite,
+                            Style = newStyle,
+                            IsSigned = newIsSigned,
+                            ContactName = newContactName,
+                            ContactPhoneNumber = newContactPhoneNumber
+                        };
+                        context.Bands.Add(newBand);
+                        context.SaveChanges();
+                    }
                     //     	IF (Album)
-                    //     		Ask the user which Band they want to add the Album to
-                    //     		Read the answer and set it to a variable (bandNameChosen)
-                    //     		var band = context.Bands.First(band => band.Name == “bandNameChosen”);
+                    if (answer == "ALBUM")
+                    {
+                        //     		Ask the user which Band they want to add the Album to
+                        //     		Read the answer and set it to a variable (bandNameChosen)
+                        //     		var band = context.Bands.First(band => band.Name == “bandNameChosen”);
 
-                    //     		Ask the user what is the Title of the Album
-                    //     		Read the answer and set it to a variable
-                    //     		Ask the user if the Album is Explicit (true or false)
-                    //     		Read the answer and set it to a variable
-                    //     		Ask the user for the Album’s Release Date
-                    //     		Read the answer and set it to a variable
+                        //     		Ask the user what is the Title of the Album
+                        //     		Read the answer and set it to a variable
+                        //     		Ask the user if the Album is Explicit (true or false)
+                        //     		Read the answer and set it to a variable
+                        //     		Ask the user for the Album’s Release Date
+                        //     		Read the answer and set it to a variable
 
-                    //     		Make a new instance of an Album (using the answers)
-                    //     			var newAlbum = new Album {
-                    //     			Title=
-                    //     			IsExplicit=
-                    //     			ReleaseDate=
-                    //     			BandId= band.Id    }
+                        //     		Make a new instance of an Album (using the answers)
+                        //     			var newAlbum = new Album {
+                        //     			Title=
+                        //     			IsExplicit=
+                        //     			ReleaseDate=
+                        //     			BandId= band.Id    }
 
-                    //     		Add the Album to the table of Albums
-                    //     			context.Albums.Add(newAlbum);
-                    //     			context.SaveChanges();
-
+                        //     		Add the Album to the table of Albums
+                        //     			context.Albums.Add(newAlbum);
+                        //     			context.SaveChanges();
+                    }
                     //     	IF (Song)
-                    //     		Ask the user which Album they want to add the Song to
-                    //     		Read the answer and set it to a variable (albumChosen)
-                    //     		var album = context.Albums.First(album => album.Title == “albumChosen”);
+                    if (answer == "SONG")
+                    {
+                        //     		Ask the user which Album they want to add the Song to
+                        //     		Read the answer and set it to a variable (albumChosen)
+                        //     		var album = context.Albums.First(album => album.Title == “albumChosen”);
 
-                    //     		Ask the user what is the Title of the Song
-                    //     		Read the answer and set it to a variable
-                    //     		Ask the user how long the Song is
-                    //     		Read the answer and set it to a variable
-                    //     		Ask the user what Track Number is the Song on the Album
-                    //     		Read the answer and set it to a variable (int.Parse)
+                        //     		Ask the user what is the Title of the Song
+                        //     		Read the answer and set it to a variable
+                        //     		Ask the user how long the Song is
+                        //     		Read the answer and set it to a variable
+                        //     		Ask the user what Track Number is the Song on the Album
+                        //     		Read the answer and set it to a variable (int.Parse)
 
-                    //     			IF (answer is already taken)
-                    //     				Don’t add the Song to the Album
-                    //     			IF (answer is not taken)
-                    //     				Make a new instance of an Album (using the answers)
-                    //     					var newAlbum = new Album {
-                    //     					Title=
-                    //     					Duration=
-                    //     					TrackNumber=
-                    //     					AlbumId= album.Id    }
+                        //     			IF (answer is already taken)
+                        //     				Don’t add the Song to the Album
+                        //     			IF (answer is not taken)
+                        //     				Make a new instance of an Album (using the answers)
+                        //     					var newAlbum = new Album {
+                        //     					Title=
+                        //     					Duration=
+                        //     					TrackNumber=
+                        //     					AlbumId= album.Id    }
 
-                    //     				Add the Song to the table of Songs
-                    //     					context.Songs.Add(newSong);
-                    //     					context.SaveChanges();
+                        //     				Add the Song to the table of Songs
+                        //     					context.Songs.Add(newSong);
+                        //     					context.SaveChanges();
+                    }
                 }
                 if (choice == "VIEW")
                 {
                     Console.WriteLine();
                     Console.WriteLine("Menu Options:");
+                    Console.WriteLine();
                     Console.WriteLine("View All the Bands (Bands)");
                     Console.WriteLine("View All the Albums (Albums)");
                     Console.WriteLine("View All the Albums of a Specific Band (Specific)");
                     Console.WriteLine();
+                    Console.Write("Which Option would you like to choose? ");
                     var answer = Console.ReadLine().ToUpper().Trim();
                     if (answer == "BANDS")
                     {
