@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace RhythmsGonnaGetYou
+﻿namespace RhythmsGonnaGetYou
 {
     class Program
     {

@@ -230,4 +230,5 @@ Print out all the bands not currently signed
 
 IF (Quit)
 set Bool = true;
+
 Say GoodBye
