@@ -78,7 +78,7 @@ Create a Class for Context
 
 Welcome to the App
 
-Var context = new RecordCompany();
+Var context = new RecordCompanyContext();
 
 While the user has not chosen to quit (Bool = false)
 Display Menu Options:
