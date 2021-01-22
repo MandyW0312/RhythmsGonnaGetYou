@@ -1,6 +1,6 @@
 namespace RhythmsGonnaGetYou
 {
-    class Band
+    public class Band
     {
         public int Id { get; set; }
         public string Name { get; set; }
