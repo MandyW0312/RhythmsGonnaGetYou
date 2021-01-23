@@ -19,11 +19,11 @@ Examples:
 
 - Our Record Company decides that it made a wants to Resign Fleetwood Mac to a Record Contract.
 
-- We want to add the Band, KISS to our Record Company.
+- We want to add the Band, STYX to our Record Company.
 
-- We want to add the Album ‘ ‘, to the Band Night Ranger.
+- We want to add the Album ‘Kilroy Was Here‘, to the Band STYX.
 
-- We want to add the Song ‘ ‘, to the New Night Ranger Album.
+- We want to add the Song ‘Mr.Roboto‘, to the Album 'Kilroy Was Here'.
 
 - We want to View all the Albums for Night Ranger.
 
@@ -51,7 +51,7 @@ Songs (Table):
 Id (SERIAL)
 TrackNumber (INT)
 Title (TEXT)
-Duration (TIME)
+Duration (INT)
 AlbumId (INTEGER REFERENCES “Albums” (“Id”))
 
 Create a Class for Band with the above properties
@@ -106,11 +106,11 @@ Read the answer and set it to a variable
 Ask the user for the Band’s Style of Music
 Read the answer and set it to a variable
 Ask the user if the Band is currently signed to the Record Company (true or false)
-Read the answer and set it to a variable
+Read the answer and set it to a variable (bool.Parse)
 Ask the user what is the Band’s Contact Name
 Read the answer and set it to a variable
 Ask the user what is the Band’s Contact Phone Number
-Read the answer and set it to a variable (int.Parse)
+Read the answer and set it to a variable (long.Parse)
 
     		Make a new instance of a band (using the answers)
     			var newBand = new Band {
@@ -130,14 +130,14 @@ Read the answer and set it to a variable (int.Parse)
     	IF (Album)
     		Ask the user which Band they want to add the Album to
     		Read the answer and set it to a variable (bandNameChosen)
-    		var band = context.Bands.First(band => band.Name == “bandNameChosen”);
+    		var band = context.Bands.First(band => band.Name == bandNameChosen);
 
     		Ask the user what is the Title of the Album
     		Read the answer and set it to a variable
     		Ask the user if the Album is Explicit (true or false)
-    		Read the answer and set it to a variable
+    		Read the answer and set it to a variable (bool.Parse)
     		Ask the user for the Album’s Release Date
-    		Read the answer and set it to a variable
+    		Read the answer and set it to a variable (DateTime.Parse)
 
     		Make a new instance of an Album (using the answers)
     			var newAlbum = new Album {
@@ -153,7 +153,7 @@ Read the answer and set it to a variable (int.Parse)
     	IF (Song)
     		Ask the user which Album they want to add the Song to
     		Read the answer and set it to a variable (albumChosen)
-    		var album = context.Albums.First(album => album.Title == “albumChosen”);
+    		var album = context.Albums.First(album => album.Title == albumChosen);
 
     		Ask the user what is the Title of the Song
     		Read the answer and set it to a variable
@@ -191,7 +191,7 @@ Print out all the Bands
     	IF (Specific)
     		Ask the user which Band they want to look up
     		Read the answer and set it to a variable
-    		foreach (var album in context.Albums.Include(bands => band.Name == “answer”)
+    		foreach (var album in context.Albums.Include(bands => band.Name == answer)
     			Print out the albums for a Specific Band
 
 IF (Contract Change)
@@ -200,7 +200,7 @@ Read the answer and set it to a variable
 IF (Release)
 Ask the user what Band do they want to Release from their Contract
 Read the answer and set it to a variable
-var existingBand = context.Bands.FirstOrDefault(band => band.Name == “answer”);
+var existingBand = context.Bands.FirstOrDefault(band => band.Name == answer);
 IF (existingBand == null)
 Print out couldn’t find the band
 ELSE
@@ -212,7 +212,7 @@ context.SaveChanges();
     		Ask the user what Band do they want to Resign to the Company
     		Read the answer and set it to a variable
 
-    		var existingBand = context.Bands.FirstOrDefault(band => band.Name == “answer”);
+    		var existingBand = context.Bands.FirstOrDefault(band => band.Name == answer);
     			IF (existingBand == null)
     				Print out couldn’t find the band
     			ELSE

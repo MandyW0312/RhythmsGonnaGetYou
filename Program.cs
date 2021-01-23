@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Globalization;
 using System.Linq;
 using Microsoft.EntityFrameworkCore;
 
@@ -67,7 +68,7 @@ namespace RhythmsGonnaGetYou
                         Console.Write("What is the Band's Contact Name? ");
                         var newContactName = Console.ReadLine();
                         Console.Write("What is the Band's Contact Phone Number ");
-                        var newContactPhoneNumber = int.Parse(Console.ReadLine());
+                        var newContactPhoneNumber = long.Parse(Console.ReadLine());
 
                         var newBand = new Band
                         {
@@ -82,6 +83,7 @@ namespace RhythmsGonnaGetYou
                         };
                         context.Bands.Add(newBand);
                         context.SaveChanges();
+                        Console.WriteLine($"The Band {newName} was Added!");
                     }
                     if (answer == "ALBUM")
                     {
@@ -90,7 +92,7 @@ namespace RhythmsGonnaGetYou
                         var band = context.Bands.First(band => band.Name == bandNameChosen);
 
                         Console.Write("What is the Title of the Album? ");
-                        var newTitle = Console.ReadLine();
+                        var newAlbumTitle = Console.ReadLine();
                         Console.Write("Is the Album Explicit (true or false)? ");
                         var newIsExplicit = bool.Parse(Console.ReadLine());
                         Console.Write("What is the Album's Release Date (Please have it in this format YYYY-MM-DD)? ");
@@ -98,7 +100,7 @@ namespace RhythmsGonnaGetYou
 
                         var newAlbum = new Album
                         {
-                            Title = newTitle,
+                            Title = newAlbumTitle,
                             IsExplicit = newIsExplicit,
                             ReleaseDate = newReleaseDate,
                             BandId = band.Id
@@ -106,33 +108,37 @@ namespace RhythmsGonnaGetYou
                         context.Albums.Add(newAlbum);
                         context.SaveChanges();
                     }
-                    //     	IF (Song)
                     if (answer == "SONG")
                     {
-                        //     		Ask the user which Album they want to add the Song to
-                        //     		Read the answer and set it to a variable (albumChosen)
-                        //     		var album = context.Albums.First(album => album.Title == “albumChosen”);
+                        Console.Write("Which Album do you want to Add a Song to? ");
+                        var albumChosen = Console.ReadLine();
+                        var album = context.Albums.First(album => album.Title == albumChosen);
 
-                        //     		Ask the user what is the Title of the Song
-                        //     		Read the answer and set it to a variable
-                        //     		Ask the user how long the Song is
-                        //     		Read the answer and set it to a variable
-                        //     		Ask the user what Track Number is the Song on the Album
-                        //     		Read the answer and set it to a variable (int.Parse)
+                        Console.Write("What is the Title of the Song? ");
+                        var newSongTitle = Console.ReadLine();
+                        Console.Write("How long is the Song (in seconds)? ");
+                        var newDuration = int.Parse(Console.ReadLine());
+                        Console.Write("What Track Number is the Song on the Album? ");
+                        var newTrackNumber = int.Parse(Console.ReadLine());
 
-                        //     			IF (answer is already taken)
-                        //     				Don’t add the Song to the Album
-                        //     			IF (answer is not taken)
-                        //     				Make a new instance of an Album (using the answers)
-                        //     					var newAlbum = new Album {
-                        //     					Title=
-                        //     					Duration=
-                        //     					TrackNumber=
-                        //     					AlbumId= album.Id    }
+                        var existingSongWithSameTrackAndAlbum = context.Songs.FirstOrDefault(song => song.AlbumId == album.Id && song.TrackNumber == newTrackNumber);
+                        if (existingSongWithSameTrackAndAlbum != null)
+                        {
+                            Console.WriteLine("This Track Number is taken, please try again!");
+                        }
+                        else
+                        {
+                            var newSong = new Song
+                            {
+                                Title = newSongTitle,
+                                Duration = newDuration,
+                                TrackNumber = newTrackNumber,
+                                AlbumId = album.Id
+                            };
 
-                        //     				Add the Song to the table of Songs
-                        //     					context.Songs.Add(newSong);
-                        //     					context.SaveChanges();
+                            context.Songs.Add(newSong);
+                            context.SaveChanges();
+                        }
                     }
                 }
                 if (choice == "VIEW")
