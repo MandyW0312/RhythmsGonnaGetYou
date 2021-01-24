@@ -102,7 +102,7 @@ namespace RhythmsGonnaGetYou
                     if (answer == "ALBUM")
                     {
                         var bandNameChosen = PromptForStringRegular("Which Band do you want to Add an Album to? ");
-                        var band = context.Bands.First(band => band.Name == bandNameChosen);
+                        var band = context.Bands.FirstOrDefault(band => band.Name == bandNameChosen);
 
                         var newAlbumTitle = PromptForStringRegular("What is the Title of the Album? ");
                         var newIsExplicit = PromptForBool("Is the Album Explicit (true or false)? ");
@@ -123,7 +123,7 @@ namespace RhythmsGonnaGetYou
                     if (answer == "SONG")
                     {
                         var albumChosen = PromptForStringRegular("Which Album do you want to Add a Song to? ");
-                        var album = context.Albums.First(album => album.Title == albumChosen);
+                        var album = context.Albums.FirstOrDefault(album => album.Title == albumChosen);
 
                         var newSongTitle = PromptForStringRegular("What is the Title of the Song? ");
                         var newDuration = PromptForInteger("How long is the Song (in seconds)? ");
@@ -193,7 +193,11 @@ namespace RhythmsGonnaGetYou
                     }
                     if (answer == "MEMBERS")
                     {
-
+                        var specificBand = PromptForStringRegular("Which Band would like to look up Members for? ");
+                        foreach (var position in context.Positions.Where(band => band.TheAssociatedBand.Name == specificBand).Include(position => position.TheAssociatedMusician))
+                        {
+                            Console.WriteLine($"The Band Member {position.TheAssociatedMusician.FullName} is the {position.BandPosition} of {specificBand}");
+                        }
                     }
                 }
                 if (choice == "CONTRACT CHANGE")

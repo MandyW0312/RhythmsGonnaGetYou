@@ -201,12 +201,14 @@ Print out all the Bands
     			Print out the albums for a Specific Band
 
     		IF (Genre)
-    		foreach (var album in context.Albums.Include(album=> album.TheAssociatedBand.Style))
+    		foreach (var album in context.Albums.Include(album=> album.TheAssociatedBand))
     		Print out We have this Album {album.Title} in the Genre {album.TheAssociatedBand.Style}
 
     		IF (Members)
-    			Ask the user which Band they want to look up
+    		Ask the user which Band they want to look up
     		Read the answer and set it to a variable
+    			foreach (var position in context.Positions.Where(band => band.TheAssociatedBand.Name == specificBand).Include(position => position.TheAssociatedMusician))
+    			Print out {position.TheAssociatedMusician.FullName} is the {position.BandPosition} of {band.Name}
 
 IF (Contract Change)
 Ask the user if they want to Release a Band from their Contract or Resign a Band
