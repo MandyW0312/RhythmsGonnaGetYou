@@ -10,6 +10,6 @@ namespace RhythmsGonnaGetYou
         public int Duration { get; set; }
         public int AlbumId { get; set; }
 
-        public Album TheAlbumAssociatedToTheSongObject { get; set; }
+        public Album TheAssociatedAlbum { get; set; }
     }
 }

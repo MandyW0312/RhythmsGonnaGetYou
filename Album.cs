@@ -12,6 +12,6 @@ namespace RhythmsGonnaGetYou
 
         public int BandId { get; set; }
 
-        public Band TheBandAssociatedtotheAlbumObject { get; set; }
+        public Band TheAssociatedBand { get; set; }
     }
 }

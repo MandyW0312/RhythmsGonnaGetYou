@@ -177,7 +177,7 @@ namespace RhythmsGonnaGetYou
                     if (answer == "SPECIFIC")
                     {
                         var specificBand = PromptForStringRegular("Which Band would like to look up Albums for? ");
-                        foreach (var album in context.Albums.Where(band => band.TheBandAssociatedtotheAlbumObject.Name == specificBand))
+                        foreach (var album in context.Albums.Where(band => band.TheAssociatedBand.Name == specificBand))
                         {
                             Console.WriteLine($"The Albums for {specificBand} are {album.Title}");
                         }
