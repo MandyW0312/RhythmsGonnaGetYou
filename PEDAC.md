@@ -75,6 +75,10 @@ Create a table called “Albums”
 Insert some Albums into the “Albums” table
 Create a table called “Songs”
 Insert some Songs into the “Songs” table
+Create a table called "Musicians"
+Insert some Musicians into the "Musicians" table
+Create a table called "Positions"
+Insert data into the "Positions" table to match the MusicianId and BandId
 
 In VSCode:
 Create a Class for Band with the above properties
