@@ -7,6 +7,30 @@ namespace RhythmsGonnaGetYou
 {
     class Program
     {
+        static string PromptForStringUpper(string prompt)
+        {
+            Console.Write(prompt);
+            var userInput = Console.ReadLine().ToUpper().Trim();
+            return userInput;
+        }
+        static string PromptForStringRegular(string prompt)
+        {
+            Console.Write(prompt);
+            var userInput = Console.ReadLine();
+            return userInput;
+        }
+        static int PromptForInteger(string prompt)
+        {
+            Console.Write(prompt);
+            var userInput = int.Parse(Console.ReadLine());
+            return userInput;
+        }
+        static bool PromptForBool(string prompt)
+        {
+            Console.Write(prompt);
+            var userInput = bool.Parse(Console.ReadLine());
+            return userInput;
+        }
         static void BannerMessage(string message)
         {
             Console.WriteLine();
@@ -35,9 +59,7 @@ namespace RhythmsGonnaGetYou
                 Console.WriteLine("Quit");
                 Console.WriteLine();
 
-                Console.Write("Which Option would you like to choose? ");
-                var choice = Console.ReadLine().ToUpper().Trim();
-
+                var choice = PromptForStringUpper("Which Option would you like to choose? ");
 
                 if (choice == "ADD")
                 {
@@ -48,25 +70,17 @@ namespace RhythmsGonnaGetYou
                     Console.WriteLine("Add a New Album for a Band (Album)");
                     Console.WriteLine("Add a New Song to an Album (Song)");
                     Console.WriteLine();
-                    Console.Write("Which Option would you like to choose? ");
+                    var answer = PromptForStringUpper("Which Option would you like to choose? ");
 
-                    var answer = Console.ReadLine().ToUpper().Trim();
                     if (answer == "BAND")
                     {
-                        Console.Write("What is the Name of the Band? ");
-                        var newName = Console.ReadLine();
-                        Console.Write("What is the Band's Country Of Origin? ");
-                        var newCountryOfOrigin = Console.ReadLine();
-                        Console.Write("How many Members are in the Band? ");
-                        var newNumberOfMembers = int.Parse(Console.ReadLine());
-                        Console.Write("What is the Band's Website URL? ");
-                        var newWebsite = Console.ReadLine();
-                        Console.Write("What is the Band's Style of Music? ");
-                        var newStyle = Console.ReadLine();
-                        Console.Write("Is the Band currently Signed to the Record Company (true or false)? ");
-                        var newIsSigned = bool.Parse(Console.ReadLine());
-                        Console.Write("What is the Band's Contact Name? ");
-                        var newContactName = Console.ReadLine();
+                        var newName = PromptForStringRegular("What is the Name of the Band? ");
+                        var newCountryOfOrigin = PromptForStringRegular("What is the Band's Country Of Origin? ");
+                        var newNumberOfMembers = PromptForInteger("How many Members are in the Band? ");
+                        var newWebsite = PromptForStringRegular("What is the Band's Website URL? ");
+                        var newStyle = PromptForStringRegular("What is the Band's Style of Music? ");
+                        var newIsSigned = PromptForBool("Is the Band currently Signed to the Record Company (true or false)? ");
+                        var newContactName = PromptForStringRegular("What is the Band's Contact Name? ");
                         Console.Write("What is the Band's Contact Phone Number ");
                         var newContactPhoneNumber = long.Parse(Console.ReadLine());
 
@@ -87,14 +101,11 @@ namespace RhythmsGonnaGetYou
                     }
                     if (answer == "ALBUM")
                     {
-                        Console.Write("Which Band do you want to Add an Album to? ");
-                        var bandNameChosen = Console.ReadLine();
+                        var bandNameChosen = PromptForStringRegular("Which Band do you want to Add an Album to? ");
                         var band = context.Bands.First(band => band.Name == bandNameChosen);
 
-                        Console.Write("What is the Title of the Album? ");
-                        var newAlbumTitle = Console.ReadLine();
-                        Console.Write("Is the Album Explicit (true or false)? ");
-                        var newIsExplicit = bool.Parse(Console.ReadLine());
+                        var newAlbumTitle = PromptForStringRegular("What is the Title of the Album? ");
+                        var newIsExplicit = PromptForBool("Is the Album Explicit (true or false)? ");
                         Console.Write("What is the Album's Release Date (Please have it in this format YYYY-MM-DD)? ");
                         var newReleaseDate = DateTime.Parse(Console.ReadLine());
 
@@ -107,22 +118,19 @@ namespace RhythmsGonnaGetYou
                         };
                         context.Albums.Add(newAlbum);
                         context.SaveChanges();
+                        Console.WriteLine($"The Album {newAlbumTitle} was added!");
                     }
                     if (answer == "SONG")
                     {
-                        Console.Write("Which Album do you want to Add a Song to? ");
-                        var albumChosen = Console.ReadLine();
+                        var albumChosen = PromptForStringRegular("Which Album do you want to Add a Song to? ");
                         var album = context.Albums.First(album => album.Title == albumChosen);
 
-                        Console.Write("What is the Title of the Song? ");
-                        var newSongTitle = Console.ReadLine();
-                        Console.Write("How long is the Song (in seconds)? ");
-                        var newDuration = int.Parse(Console.ReadLine());
-                        Console.Write("What Track Number is the Song on the Album? ");
-                        var newTrackNumber = int.Parse(Console.ReadLine());
+                        var newSongTitle = PromptForStringRegular("What is the Title of the Song? ");
+                        var newDuration = PromptForInteger("How long is the Song (in seconds)? ");
+                        var newTrackNumber = PromptForInteger("What Track Number is the Song on the Album? ");
 
-                        var existingSongWithSameTrackAndAlbum = context.Songs.FirstOrDefault(song => song.AlbumId == album.Id && song.TrackNumber == newTrackNumber);
-                        if (existingSongWithSameTrackAndAlbum != null)
+                        var checkingTrackNumber = context.Songs.FirstOrDefault(song => song.AlbumId == album.Id && song.TrackNumber == newTrackNumber);
+                        if (checkingTrackNumber != null)
                         {
                             Console.WriteLine("This Track Number is taken, please try again!");
                         }
@@ -135,9 +143,9 @@ namespace RhythmsGonnaGetYou
                                 TrackNumber = newTrackNumber,
                                 AlbumId = album.Id
                             };
-
                             context.Songs.Add(newSong);
                             context.SaveChanges();
+                            Console.WriteLine($"The Song {newSongTitle} was added!");
                         }
                     }
                 }
@@ -150,8 +158,7 @@ namespace RhythmsGonnaGetYou
                     Console.WriteLine("View All the Albums (Albums)");
                     Console.WriteLine("View All the Albums of a Specific Band (Specific)");
                     Console.WriteLine();
-                    Console.Write("Which Option would you like to choose? ");
-                    var answer = Console.ReadLine().ToUpper().Trim();
+                    var answer = PromptForStringUpper("Which Option would you like to choose? ");
                     if (answer == "BANDS")
                     {
                         foreach (var band in context.Bands)
@@ -169,22 +176,19 @@ namespace RhythmsGonnaGetYou
                     }
                     if (answer == "SPECIFIC")
                     {
-                        Console.Write("Which Band would like to look up Albums for? ");
-                        var specificBand = Console.ReadLine();
+                        var specificBand = PromptForStringRegular("Which Band would like to look up Albums for? ");
                         foreach (var album in context.Albums.Where(band => band.TheBandAssociatedtotheAlbumObject.Name == specificBand))
                         {
-                            Console.WriteLine($"The Albums for {specificBand} is {album.Title}");
+                            Console.WriteLine($"The Albums for {specificBand} are {album.Title}");
                         }
                     }
                 }
                 if (choice == "CONTRACT CHANGE")
                 {
-                    Console.Write("Would you like to Release a Band from their Contract (Release) or Resign a Band (Resign)? ");
-                    var answer = Console.ReadLine().ToUpper().Trim();
+                    var answer = PromptForStringUpper("Would you like to Release a Band from their Contract (Release) or Resign a Band (Resign)? ");
                     if (answer == "RELEASE")
                     {
-                        Console.Write("What Band would you like to Release from their Contract? ");
-                        var releasedBand = Console.ReadLine();
+                        var releasedBand = PromptForStringRegular("What Band would you like to Release from their Contract? ");
                         var existingBand = context.Bands.FirstOrDefault(band => band.Name == releasedBand);
                         if (existingBand == null)
                         {
@@ -199,8 +203,7 @@ namespace RhythmsGonnaGetYou
                     }
                     if (answer == "RESIGN")
                     {
-                        Console.Write("What Band would you like to Resign to their Contract? ");
-                        var resignedBand = Console.ReadLine();
+                        var resignedBand = PromptForStringRegular("What Band would you like to Resign to their Contract? ");
                         var existingBand = context.Bands.FirstOrDefault(band => band.Name == resignedBand);
                         if (existingBand == null)
                         {

@@ -1,9 +1,7 @@
 Problem:
 
 - Model and Create a Database (RecordCompany)
-
 - Starting a record label company and we have a place to store our Bands, Albums, and eventually Songs
-
 - Create a console app that stores the info into a Database
 
 C R U D
@@ -16,15 +14,10 @@ C R U D
 Examples:
 
 - Our Record Company Releases ABBA from its Record Contract.
-
 - Our Record Company decides that it made a wants to Resign Fleetwood Mac to a Record Contract.
-
-- We want to add the Band, STYX to our Record Company.
-
-- We want to add the Album ‘Kilroy Was Here‘, to the Band STYX.
-
-- We want to add the Song ‘Mr.Roboto‘, to the Album 'Kilroy Was Here'.
-
+- We want to Add the Band, STYX to our Record Company.
+- We want to Add the Album ‘Kilroy Was Here‘, to the Band STYX.
+- We want to Add the Song ‘Mr.Roboto‘, to the Album 'Kilroy Was Here'.
 - We want to View all the Albums for Night Ranger.
 
 Data Structure:
