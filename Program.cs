@@ -157,6 +157,8 @@ namespace RhythmsGonnaGetYou
                     Console.WriteLine("View All the Bands (Bands)");
                     Console.WriteLine("View All the Albums (Albums)");
                     Console.WriteLine("View All the Albums of a Specific Band (Specific)");
+                    Console.WriteLine("View All Albums in a Genre (Genre)");
+                    Console.WriteLine("View All Members of a Band (Members)");
                     Console.WriteLine();
                     var answer = PromptForStringUpper("Which Option would you like to choose? ");
                     if (answer == "BANDS")
@@ -181,6 +183,17 @@ namespace RhythmsGonnaGetYou
                         {
                             Console.WriteLine($"The Albums for {specificBand} are {album.Title}");
                         }
+                    }
+                    if (answer == "GENRE")
+                    {
+                        foreach (var album in context.Albums.Include(album => album.TheAssociatedBand))
+                        {
+                            Console.WriteLine($"We have this Album: {album.Title} in the Genre { album.TheAssociatedBand.Style}");
+                        }
+                    }
+                    if (answer == "MEMBERS")
+                    {
+
                     }
                 }
                 if (choice == "CONTRACT CHANGE")
