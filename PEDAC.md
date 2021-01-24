@@ -85,6 +85,8 @@ Create a Class for Band with the above properties
 Create a Class for Album with the above properties
 Create a Class for Song with the above properties
 Create a Class for Context
+Create a Class for Musician with the above properties
+Create a Class for Position with the above properties
 
 Welcome to the App
 
