@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+
 namespace RhythmsGonnaGetYou
 {
     public class Band
@@ -12,6 +14,8 @@ namespace RhythmsGonnaGetYou
 
         public string ContactName { get; set; }
         public long ContactPhoneNumber { get; set; }
+        public List<Position> Positions { get; set; }
+        public List<Album> Albums { get; set; }
 
     }
 }

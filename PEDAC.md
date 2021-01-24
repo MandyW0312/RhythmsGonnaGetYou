@@ -47,10 +47,23 @@ Title (TEXT)
 Duration (INT)
 AlbumId (INTEGER REFERENCES “Albums” (“Id”))
 
+Musicians (Table):
+Id (SERIAL)
+FullName (TEXT)
+Birthday (DATE)
+
+Positions (Table):
+Id (SERIAL)
+BandId (INTEGER REFERENCES “Bands” (“Id”))
+MusicianId (INTEGER REFERENCES “Bands” (“Id”))
+BandPosition (TEXT)
+
 Create a Class for Band with the above properties
 Create a Class for Album with the above properties
 Create a Class for Song with the above properties
 Create a Class for Context
+Create a Class for Musician with the above properties
+Create a Class for Position with the above properties
 
 Algorithm:
 
@@ -170,7 +183,7 @@ Read the answer and set it to a variable (long.Parse)
     					context.SaveChanges();
 
 IF (View)
-Ask the user if they want to view all the Bands, view all the Albums, or view Albums by a Specific Band (Possible Menu Options)
+Ask the user if they want to view all the Bands, view all the Albums, view Albums by a Specific Band, view all Albums in a Genre, or view all Members of a Band (Possible Menu Options)
 Read the answer and set to a variable
 IF (Bands)
 foreach(var band in context.Bands)
@@ -186,6 +199,14 @@ Print out all the Bands
     		Read the answer and set it to a variable
     		foreach (var album in context.Albums.Include(bands => band.Name == answer)
     			Print out the albums for a Specific Band
+
+    		IF (Genre)
+    		foreach (var album in context.Albums.Include(album=> album.TheAssociatedBand.Style))
+    		Print out We have this Album {album.Title} in the Genre {album.TheAssociatedBand.Style}
+
+    		IF (Members)
+    			Ask the user which Band they want to look up
+    		Read the answer and set it to a variable
 
 IF (Contract Change)
 Ask the user if they want to Release a Band from their Contract or Resign a Band
