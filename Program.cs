@@ -69,6 +69,7 @@ namespace RhythmsGonnaGetYou
                     Console.WriteLine("Add a New Band (Band)");
                     Console.WriteLine("Add a New Album for a Band (Album)");
                     Console.WriteLine("Add a New Song to an Album (Song)");
+                    Console.WriteLine("Add a New Bans Member to a Band (Member)");
                     Console.WriteLine();
                     var answer = PromptForStringUpper("Which Option would you like to choose? ");
 
@@ -147,6 +148,35 @@ namespace RhythmsGonnaGetYou
                             context.SaveChanges();
                             Console.WriteLine($"The Song {newSongTitle} was added!");
                         }
+                    }
+                    if (answer == "MEMBER")
+                    {
+                        var bandNameChosen = PromptForStringRegular("Which Band do you want to Add a Member to? ");
+                        var band = context.Bands.FirstOrDefault(band => band.Name == bandNameChosen);
+                        var newFullName = PromptForStringRegular("What is the Band Member's Name? ");
+                        Console.Write("What is the Band Member's Birthday (YYYY-MM-DD)? ");
+                        var newBirthday = DateTime.Parse(Console.ReadLine());
+                        var newBandPosition = PromptForStringRegular("What's is the Band Member's Position in the Band? ");
+
+                        var newMusician = new Musician
+                        {
+                            FullName = newFullName,
+                            Birthday = newBirthday
+                        };
+                        context.Musicians.Add(newMusician);
+                        context.SaveChanges();
+                        Console.WriteLine($"The Band Member {newFullName} has been added to the Band {bandNameChosen} in our system.");
+
+                        var musician = context.Musicians.FirstOrDefault(musician => musician.FullName == newFullName);
+
+                        var newPosition = new Position
+                        {
+                            BandId = band.Id,
+                            MusicianId = musician.Id,
+                            BandPosition = newBandPosition
+                        };
+                        context.Positions.Add(newPosition);
+                        context.SaveChanges();
                     }
                 }
                 if (choice == "VIEW")
