@@ -14,7 +14,7 @@ C R U D
 Examples:
 
 - Our Record Company Releases ABBA from its Record Contract.
-- Our Record Company decides that it made a wants to Resign Fleetwood Mac to a Record Contract.
+- Our Record Company decides that it wants to Resign ABBA to a Record Contract.
 - We want to Add the Band, STYX to our Record Company.
 - We want to Add the Album ‘Kilroy Was Here‘, to the Band STYX.
 - We want to Add the Song ‘Mr.Roboto‘, to the Album 'Kilroy Was Here'.
@@ -206,11 +206,11 @@ Print out all the Bands
     		foreach (var album in context.Albums.Include(bands => band.Name == answer)
     			Print out the albums for a Specific Band
 
-    		IF (Genre)
+    	IF (Genre)
     		foreach (var album in context.Albums.Include(album=> album.TheAssociatedBand))
     		Print out We have this Album {album.Title} in the Genre {album.TheAssociatedBand.Style}
 
-    		IF (Members)
+    	IF (Members)
     		Ask the user which Band they want to look up
     		Read the answer and set it to a variable
     			foreach (var position in context.Positions.Where(band => band.TheAssociatedBand.Name == specificBand).Include(position => position.TheAssociatedMusician))
