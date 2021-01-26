@@ -54,6 +54,7 @@ namespace RhythmsGonnaGetYou
                 Console.WriteLine();
                 Console.WriteLine("Add");
                 Console.WriteLine("View");
+                Console.WriteLine("Remove");
                 Console.WriteLine("Contract Change");
                 Console.WriteLine("Current Clients");
                 Console.WriteLine("Quit");
@@ -228,6 +229,25 @@ namespace RhythmsGonnaGetYou
                         {
                             Console.WriteLine($"The Band Member {position.TheAssociatedMusician.FullName} is the {position.BandPosition} of {specificBand}");
                         }
+                    }
+                }
+                if (choice == "REMOVE")
+                {
+                    var removingMusician = PromptForStringRegular("Which Band Member would you like to Remove? ");
+                    var musicianToDelete = context.Musicians.FirstOrDefault(musician => musician.FullName == removingMusician);
+                    if (musicianToDelete == null)
+                    {
+                        Console.WriteLine($"We couldn't find the Band Member {removingMusician} in our system, so we are unable to complete your request.");
+                    }
+                    else
+                    {
+                        var positionToDelete = context.Positions.FirstOrDefault(position => position.MusicianId == musicianToDelete.Id);
+                        context.Positions.Remove(positionToDelete);
+                        context.SaveChanges();
+
+                        context.Musicians.Remove(musicianToDelete);
+                        context.SaveChanges();
+                        Console.WriteLine($"The Band Member {removingMusician} has been removed from our Records");
                     }
                 }
                 if (choice == "CONTRACT CHANGE")
