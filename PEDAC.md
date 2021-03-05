@@ -76,15 +76,15 @@ In SQL:
 
 - Create a Database (RecordCompany)
 - Create a table called “Bands”
-  -- Insert some Bands into the “Bands” table
+  Insert some Bands into the “Bands” table
 - Create a table called “Albums”
-  -- Insert some Albums into the “Albums” table
+  Insert some Albums into the “Albums” table
 - Create a table called “Songs”
-  -- Insert some Songs into the “Songs” table
+  Insert some Songs into the “Songs” table
 - Create a table called "Musicians"
-  -- Insert some Musicians into the "Musicians" table
+  Insert some Musicians into the "Musicians" table
 - Create a table called "Positions"
-  -- Insert data into the "Positions" table to match the MusicianId and BandId
+  Insert data into the "Positions" table to match the MusicianId and BandId
 
 In VSCode:
 
