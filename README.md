@@ -8,3 +8,6 @@ The following technologies were used:
 
 - [SQL](https://developer.mozilla.org/en-US/docs/Glossary/SQL)
 - [ORMs](https://hibernate.org/orm/what-is-an-orm/) (EF Core)
+
+![Getting Started](Database.jpg)
+![Getting Started](SQL.png)
