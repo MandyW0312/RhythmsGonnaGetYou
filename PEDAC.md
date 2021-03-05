@@ -23,84 +23,94 @@ Examples:
 Data Structure:
 
 Bands (Table):
-Id (SERIAL)
-Name (TEXT)
-CountryOfOrigin (TEXT)
-NumberOfMembers (INT)
-Website (TEXT)
-Style (TEXT)
-IsSigned (BOOL)
-ContactName (TEXT)
-ContactPhoneNumber (INT)
+
+- Id (SERIAL)
+- Name (TEXT)
+- CountryOfOrigin (TEXT)
+- NumberOfMembers (INT)
+- Website (TEXT)
+- Style (TEXT)
+- IsSigned (BOOL)
+- ContactName (TEXT)
+- ContactPhoneNumber (INT)
 
 Albums (Table):
-Id (SERIAL)
-Title (TEXT)
-IsExplicit (BOOL)
-ReleaseDate (DATE)
-BandID (INTEGER REFERENCES “Bands” (“Id”))
+
+- Id (SERIAL)
+- Title (TEXT)
+- IsExplicit (BOOL)
+- ReleaseDate (DATE)
+- BandID (INTEGER REFERENCES “Bands” (“Id”))
 
 Songs (Table):
-Id (SERIAL)
-TrackNumber (INT)
-Title (TEXT)
-Duration (INT)
-AlbumId (INTEGER REFERENCES “Albums” (“Id”))
+
+- Id (SERIAL)
+- TrackNumber (INT)
+- Title (TEXT)
+- Duration (INT)
+- AlbumId (INTEGER REFERENCES “Albums” (“Id”))
 
 Musicians (Table):
-Id (SERIAL)
-FullName (TEXT)
-Birthday (DATE)
+
+- Id (SERIAL)
+- FullName (TEXT)
+- Birthday (DATE)
 
 Positions (Table):
-Id (SERIAL)
-BandId (INTEGER REFERENCES “Bands” (“Id”))
-MusicianId (INTEGER REFERENCES “Bands” (“Id”))
-BandPosition (TEXT)
 
-Create a Class for Band with the above properties
-Create a Class for Album with the above properties
-Create a Class for Song with the above properties
-Create a Class for Context
-Create a Class for Musician with the above properties
-Create a Class for Position with the above properties
+- Id (SERIAL)
+- BandId (INTEGER REFERENCES “Bands” (“Id”))
+- MusicianId (INTEGER REFERENCES “Bands” (“Id”))
+- BandPosition (TEXT)
+
+- Create a Class for Band with the above properties
+- Create a Class for Album with the above properties
+- Create a Class for Song with the above properties
+- Create a Class for Context
+- Create a Class for Musician with the above properties
+- Create a Class for Position with the above properties
 
 Algorithm:
 
 In SQL:
-Create a Database (RecordCompany)
-Create a table called “Bands”
-Insert some Bands into the “Bands” table
-Create a table called “Albums”
-Insert some Albums into the “Albums” table
-Create a table called “Songs”
-Insert some Songs into the “Songs” table
-Create a table called "Musicians"
-Insert some Musicians into the "Musicians" table
-Create a table called "Positions"
-Insert data into the "Positions" table to match the MusicianId and BandId
+
+- Create a Database (RecordCompany)
+- Create a table called “Bands”
+  -- Insert some Bands into the “Bands” table
+- Create a table called “Albums”
+  -- Insert some Albums into the “Albums” table
+- Create a table called “Songs”
+  -- Insert some Songs into the “Songs” table
+- Create a table called "Musicians"
+  -- Insert some Musicians into the "Musicians" table
+- Create a table called "Positions"
+  -- Insert data into the "Positions" table to match the MusicianId and BandId
 
 In VSCode:
-Create a Class for Band with the above properties
-Create a Class for Album with the above properties
-Create a Class for Song with the above properties
-Create a Class for Context
-Create a Class for Musician with the above properties
-Create a Class for Position with the above properties
+
+- Create a Class for Band with the above properties
+- Create a Class for Album with the above properties
+- Create a Class for Song with the above properties
+- Create a Class for Context
+- Create a Class for Musician with the above properties
+- Create a Class for Position with the above properties
 
 Welcome to the App
 
 Var context = new RecordCompanyContext();
 
 While the user has not chosen to quit (Bool = false)
+
 Display Menu Options:
-Add
-View
-Contract Change
-Current Clients
-Quit
+
+- Add
+- View
+- Contract Change
+- Current Clients
+- Quit
 
 Ask the user which they would like to choose
+
 Read the answer and set to a variable
 
 IF (Add)
